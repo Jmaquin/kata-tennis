@@ -1,3 +1,5 @@
+[![codecov](https://codecov.io/gh/Jmaquin/kata-tennis/branch/master/graph/badge.svg)](https://codecov.io/gh/Jmaquin/kata-tennis)
+
 # Kata tennis  
   
 ## SPRINT1 : manage a tennis GAME within a set of a tennis match  
