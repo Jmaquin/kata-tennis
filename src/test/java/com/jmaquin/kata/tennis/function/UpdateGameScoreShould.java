@@ -95,7 +95,7 @@ class UpdateGameScoreShould {
   private Arbitrary<Tuple.Tuple2<GameScore, GameScore>> notDeuceGameScores() {
     final List<GameScore> scorerGameScores = List.of(GameScore.values());
     final List<GameScore> opponentGameScores = List.of(GameScore.values());
-    final Collection<Tuple.Tuple2<GameScore, GameScore>> validGameScores =
+    final Collection<Tuple.Tuple2<GameScore, GameScore>> scores =
         scorerGameScores.stream()
             .flatMap(
                 scorerGameScore ->
@@ -106,7 +106,7 @@ class UpdateGameScoreShould {
             .filter(tuple -> !Tuple.of(GameScore.FORTY, GameScore.ADVANTAGE).equals(tuple))
             .filter(tuple -> !Tuple.of(GameScore.ADVANTAGE, GameScore.FORTY).equals(tuple))
             .collect(Collectors.toList());
-    return Arbitraries.of(validGameScores);
+    return Arbitraries.of(scores);
   }
 
   @Property

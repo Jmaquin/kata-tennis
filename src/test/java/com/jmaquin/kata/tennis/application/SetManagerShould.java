@@ -37,7 +37,7 @@ class SetManagerShould {
   private Arbitrary<Tuple.Tuple2<SetScore, SetScore>> setScoresPlayerOne() {
     final List<SetScore> scorerSetScores = List.of(SetScore.values());
     final List<SetScore> opponentSetScores = List.of(SetScore.values());
-    final Collection<Tuple.Tuple2<SetScore, SetScore>> validGameScores =
+    final Collection<Tuple.Tuple2<SetScore, SetScore>> scores =
         scorerSetScores.stream()
             .flatMap(
                 scorerGameScore ->
@@ -48,7 +48,7 @@ class SetManagerShould {
             .filter(tuple -> !Tuple.of(SetScore.SEVEN, SetScore.FIVE).equals(tuple))
             .filter(tuple -> !Tuple.of(SetScore.SEVEN, SetScore.SIX).equals(tuple))
             .collect(Collectors.toList());
-    return Arbitraries.of(validGameScores);
+    return Arbitraries.of(scores);
   }
 
   @Property
@@ -86,7 +86,7 @@ class SetManagerShould {
   private Arbitrary<Tuple.Tuple2<SetScore, SetScore>> setScoresPlayerTwo() {
     final List<SetScore> scorerSetScores = List.of(SetScore.values());
     final List<SetScore> opponentSetScores = List.of(SetScore.values());
-    final Collection<Tuple.Tuple2<SetScore, SetScore>> validGameScores =
+    final Collection<Tuple.Tuple2<SetScore, SetScore>> scores =
         scorerSetScores.stream()
             .flatMap(
                 scorerGameScore ->
@@ -97,7 +97,7 @@ class SetManagerShould {
             .filter(tuple -> !Tuple.of(SetScore.FIVE, SetScore.SEVEN).equals(tuple))
             .filter(tuple -> !Tuple.of(SetScore.SIX, SetScore.SEVEN).equals(tuple))
             .collect(Collectors.toList());
-    return Arbitraries.of(validGameScores);
+    return Arbitraries.of(scores);
   }
 
   @Property

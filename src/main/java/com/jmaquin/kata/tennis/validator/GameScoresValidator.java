@@ -1,6 +1,7 @@
 package com.jmaquin.kata.tennis.validator;
 
 import static io.vavr.API.*;
+import static io.vavr.Predicates.isIn;
 
 import com.jmaquin.kata.tennis.domain.enums.GameScore;
 import io.vavr.Tuple;
@@ -13,31 +14,33 @@ public class GameScoresValidator
   @Override
   public Validation<String, Tuple2<GameScore, GameScore>> apply(
       GameScore scorerScore, GameScore opponentScore) {
-    final Validation<String, Tuple2<GameScore, GameScore>> invalid =
-        Validation.invalid(
-            String.format(
-                "Score and opponent scores are not coherent, %s - %s is not a possible score",
-                scorerScore, opponentScore));
-
     return Match(Tuple.of(scorerScore, opponentScore))
         .of(
-            Case($(Tuple.of(GameScore.ZERO, GameScore.DEUCE)), () -> invalid),
-            Case($(Tuple.of(GameScore.ZERO, GameScore.ADVANTAGE)), () -> invalid),
-            Case($(Tuple.of(GameScore.FIFTEEN, GameScore.DEUCE)), () -> invalid),
-            Case($(Tuple.of(GameScore.FIFTEEN, GameScore.ADVANTAGE)), () -> invalid),
-            Case($(Tuple.of(GameScore.THIRTY, GameScore.ADVANTAGE)), () -> invalid),
-            Case($(Tuple.of(GameScore.THIRTY, GameScore.DEUCE)), () -> invalid),
-            Case($(Tuple.of(GameScore.FORTY, GameScore.FORTY)), () -> invalid),
-            Case($(Tuple.of(GameScore.FORTY, GameScore.DEUCE)), () -> invalid),
-            Case($(Tuple.of(GameScore.DEUCE, GameScore.ZERO)), () -> invalid),
-            Case($(Tuple.of(GameScore.DEUCE, GameScore.FIFTEEN)), () -> invalid),
-            Case($(Tuple.of(GameScore.DEUCE, GameScore.THIRTY)), () -> invalid),
-            Case($(Tuple.of(GameScore.DEUCE, GameScore.FORTY)), () -> invalid),
-            Case($(Tuple.of(GameScore.DEUCE, GameScore.ADVANTAGE)), () -> invalid),
-            Case($(Tuple.of(GameScore.ADVANTAGE, GameScore.ZERO)), () -> invalid),
-            Case($(Tuple.of(GameScore.ADVANTAGE, GameScore.FIFTEEN)), () -> invalid),
-            Case($(Tuple.of(GameScore.ADVANTAGE, GameScore.THIRTY)), () -> invalid),
-            Case($(Tuple.of(GameScore.ADVANTAGE, GameScore.DEUCE)), () -> invalid),
+            Case(
+                $(
+                    isIn(
+                        Tuple.of(GameScore.ZERO, GameScore.DEUCE),
+                        Tuple.of(GameScore.ZERO, GameScore.ADVANTAGE),
+                        Tuple.of(GameScore.FIFTEEN, GameScore.DEUCE),
+                        Tuple.of(GameScore.FIFTEEN, GameScore.ADVANTAGE),
+                        Tuple.of(GameScore.THIRTY, GameScore.ADVANTAGE),
+                        Tuple.of(GameScore.THIRTY, GameScore.DEUCE),
+                        Tuple.of(GameScore.FORTY, GameScore.FORTY),
+                        Tuple.of(GameScore.FORTY, GameScore.DEUCE),
+                        Tuple.of(GameScore.DEUCE, GameScore.ZERO),
+                        Tuple.of(GameScore.DEUCE, GameScore.FIFTEEN),
+                        Tuple.of(GameScore.DEUCE, GameScore.THIRTY),
+                        Tuple.of(GameScore.DEUCE, GameScore.FORTY),
+                        Tuple.of(GameScore.DEUCE, GameScore.ADVANTAGE),
+                        Tuple.of(GameScore.ADVANTAGE, GameScore.ZERO),
+                        Tuple.of(GameScore.ADVANTAGE, GameScore.FIFTEEN),
+                        Tuple.of(GameScore.ADVANTAGE, GameScore.THIRTY),
+                        Tuple.of(GameScore.ADVANTAGE, GameScore.DEUCE))),
+                () ->
+                    Validation.invalid(
+                        String.format(
+                            "Score and opponent scores are not coherent, %s - %s is not a possible score",
+                            scorerScore, opponentScore))),
             Case($(), () -> Validation.valid(Tuple.of(scorerScore, opponentScore))));
   }
 }
