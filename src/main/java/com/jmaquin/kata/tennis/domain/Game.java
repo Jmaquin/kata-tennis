@@ -4,8 +4,8 @@ import lombok.Builder;
 import lombok.Data;
 
 @Data
-@Builder
+@Builder(toBuilder = true)
 public class Game {
-  private final GameScore playerOneScore = GameScore.ZERO;
-  private final GameScore playerTwoScore = GameScore.ZERO;
+  @Builder.Default private final GameScore playerOneScore = GameScore.ZERO;
+  @Builder.Default private final GameScore playerTwoScore = GameScore.ZERO;
 }
