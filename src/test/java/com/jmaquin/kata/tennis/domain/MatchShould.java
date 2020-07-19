@@ -1,21 +1,24 @@
 package com.jmaquin.kata.tennis.domain;
 
+import static com.jmaquin.kata.tennis.DataFactory.aMatch;
+import static com.jmaquin.kata.tennis.DataFactory.aSet;
 import static org.assertj.core.api.Assertions.assertThat;
 
-import com.jmaquin.kata.tennis.DataFactory;
 import com.jmaquin.kata.tennis.domain.enums.State;
+import com.jmaquin.kata.tennis.domain.enums.Winner;
 import org.junit.jupiter.api.Test;
 
-class TieBreakGameShould {
+class MatchShould {
+
   @Test
   void start_with_correct_initial_state() {
     // Given
 
     // When
-    final TieBreakGame result = TieBreakGame.builder().build();
+    final Match result = Match.builder().build();
 
     // Then
-    final TieBreakGame expected = DataFactory.aTieBreakGame(0, 0, State.NOT_STARTED);
+    final Match expected = aMatch(aSet(), State.NOT_STARTED, Winner.UNKNOWN);
     assertThat(result).isEqualTo(expected);
   }
 }

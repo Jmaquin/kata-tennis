@@ -4,7 +4,7 @@ import static com.jmaquin.kata.tennis.DataFactory.aTieBreakGame;
 import static org.assertj.core.api.Assertions.assertThat;
 
 import com.jmaquin.kata.tennis.domain.TieBreakGame;
-import com.jmaquin.kata.tennis.domain.enums.Status;
+import com.jmaquin.kata.tennis.domain.enums.State;
 import java.util.Collection;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -23,13 +23,13 @@ class TieBreakGameManagerShould {
     // Given
     final int aPlayerOneScore = 5;
     final TieBreakGame aTieBreakGame =
-        aTieBreakGame(aPlayerOneScore, aPlayerTwoScore, Status.ONGOING);
+        aTieBreakGame(aPlayerOneScore, aPlayerTwoScore, State.ONGOING);
 
     // When
     final TieBreakGame result = tieBreakGameManager.playerOneScores(aTieBreakGame);
 
     // Then
-    final TieBreakGame expected = aTieBreakGame(6, aPlayerTwoScore, Status.FINISHED);
+    final TieBreakGame expected = aTieBreakGame(6, aPlayerTwoScore, State.FINISHED);
     assertThat(result).isEqualTo(expected);
   }
 
@@ -40,13 +40,13 @@ class TieBreakGameManagerShould {
     // Given
     final int aPlayerTwoScore = 5;
     final TieBreakGame aTieBreakGame =
-        aTieBreakGame(aPlayerOneScore, aPlayerTwoScore, Status.ONGOING);
+        aTieBreakGame(aPlayerOneScore, aPlayerTwoScore, State.ONGOING);
 
     // When
     final TieBreakGame result = tieBreakGameManager.playerTwoScores(aTieBreakGame);
 
     // Then
-    final TieBreakGame expected = aTieBreakGame(aPlayerOneScore, 6, Status.FINISHED);
+    final TieBreakGame expected = aTieBreakGame(aPlayerOneScore, 6, State.FINISHED);
     assertThat(result).isEqualTo(expected);
   }
 
@@ -61,14 +61,14 @@ class TieBreakGameManagerShould {
           @ForAll("playerScore") int aPlayerOneScore) {
     // Given
     final TieBreakGame aTieBreakGame =
-        aTieBreakGame(aPlayerOneScore, aPlayerOneScore, Status.ONGOING);
+        aTieBreakGame(aPlayerOneScore, aPlayerOneScore, State.ONGOING);
 
     // When
     final TieBreakGame result = tieBreakGameManager.playerOneScores(aTieBreakGame);
 
     // Then
     final TieBreakGame expected =
-        aTieBreakGame(aPlayerOneScore + 1, aPlayerOneScore, Status.ONGOING);
+        aTieBreakGame(aPlayerOneScore + 1, aPlayerOneScore, State.ONGOING);
     assertThat(result).isEqualTo(expected);
   }
 
@@ -78,14 +78,14 @@ class TieBreakGameManagerShould {
     // Given
     final int aPlayerTwoScore = aPlayerOneScore - 1;
     final TieBreakGame aTieBreakGame =
-        aTieBreakGame(aPlayerOneScore, aPlayerTwoScore, Status.ONGOING);
+        aTieBreakGame(aPlayerOneScore, aPlayerTwoScore, State.ONGOING);
 
     // When
     final TieBreakGame result = tieBreakGameManager.playerOneScores(aTieBreakGame);
 
     // Then
     final TieBreakGame expected =
-        aTieBreakGame(aPlayerOneScore + 1, aPlayerTwoScore, Status.FINISHED);
+        aTieBreakGame(aPlayerOneScore + 1, aPlayerTwoScore, State.FINISHED);
     assertThat(result).isEqualTo(expected);
   }
 
@@ -95,14 +95,14 @@ class TieBreakGameManagerShould {
           @ForAll("playerScore") int aPlayerTwoScore) {
     // Given
     final TieBreakGame aTieBreakGame =
-        aTieBreakGame(aPlayerTwoScore, aPlayerTwoScore, Status.ONGOING);
+        aTieBreakGame(aPlayerTwoScore, aPlayerTwoScore, State.ONGOING);
 
     // When
     final TieBreakGame result = tieBreakGameManager.playerTwoScores(aTieBreakGame);
 
     // Then
     final TieBreakGame expected =
-        aTieBreakGame(aPlayerTwoScore, aPlayerTwoScore + 1, Status.ONGOING);
+        aTieBreakGame(aPlayerTwoScore, aPlayerTwoScore + 1, State.ONGOING);
     assertThat(result).isEqualTo(expected);
   }
 
@@ -112,14 +112,14 @@ class TieBreakGameManagerShould {
     // Given
     final int aPlayerOneScore = aPlayerTwoScore - 1;
     final TieBreakGame aTieBreakGame =
-        aTieBreakGame(aPlayerOneScore, aPlayerTwoScore, Status.ONGOING);
+        aTieBreakGame(aPlayerOneScore, aPlayerTwoScore, State.ONGOING);
 
     // When
     final TieBreakGame result = tieBreakGameManager.playerTwoScores(aTieBreakGame);
 
     // Then
     final TieBreakGame expected =
-        aTieBreakGame(aPlayerOneScore, aPlayerTwoScore + 1, Status.FINISHED);
+        aTieBreakGame(aPlayerOneScore, aPlayerTwoScore + 1, State.FINISHED);
     assertThat(result).isEqualTo(expected);
   }
 
@@ -144,14 +144,14 @@ class TieBreakGameManagerShould {
       @ForAll("playerScores") Tuple.Tuple2<Integer, Integer> playerScores) {
     // Given
     final TieBreakGame aTieBreakGame =
-        aTieBreakGame(playerScores.get1(), playerScores.get2(), Status.ONGOING);
+        aTieBreakGame(playerScores.get1(), playerScores.get2(), State.ONGOING);
 
     // When
     final TieBreakGame result = tieBreakGameManager.playerOneScores(aTieBreakGame);
 
     // Then
     final TieBreakGame expected =
-        aTieBreakGame(playerScores.get1() + 1, playerScores.get2(), Status.ONGOING);
+        aTieBreakGame(playerScores.get1() + 1, playerScores.get2(), State.ONGOING);
     assertThat(result).isEqualTo(expected);
   }
 
@@ -160,14 +160,14 @@ class TieBreakGameManagerShould {
       @ForAll("playerScores") Tuple.Tuple2<Integer, Integer> playerScores) {
     // Given
     final TieBreakGame aTieBreakGame =
-        aTieBreakGame(playerScores.get2(), playerScores.get1(), Status.ONGOING);
+        aTieBreakGame(playerScores.get2(), playerScores.get1(), State.ONGOING);
 
     // When
     final TieBreakGame result = tieBreakGameManager.playerTwoScores(aTieBreakGame);
 
     // Then
     final TieBreakGame expected =
-        aTieBreakGame(playerScores.get2(), playerScores.get1() + 1, Status.ONGOING);
+        aTieBreakGame(playerScores.get2(), playerScores.get1() + 1, State.ONGOING);
     assertThat(result).isEqualTo(expected);
   }
 }

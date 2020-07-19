@@ -26,13 +26,14 @@ public enum GameScore {
       return Match(this)
           .of(
               Case(
-                  $(isIn(GameScore.ZERO, GameScore.FIFTEEN, GameScore.THIRTY)),
+                  $(isIn(GameScore.ZERO, GameScore.FIFTEEN)),
                   gameScore -> {
                     throw new IllegalArgumentException(
                         String.format(
                             "Can't increment value on %s when deuce rule enabled",
                             gameScore.name()));
                   }),
+              Case($(GameScore.THIRTY), GameScore.DEUCE),
               Case($(GameScore.WIN_GAME), this),
               Case($(), () -> vals[(this.ordinal() + 1) % vals.length]));
     } else {
@@ -64,6 +65,7 @@ public enum GameScore {
                             "Can't decrement value on %s when deuce rule enabled",
                             gameScore.name()));
                   }),
+              Case($(GameScore.FORTY), GameScore.DEUCE),
               Case($(GameScore.WIN_GAME), this),
               Case($(), () -> vals[(this.ordinal() - 1) % vals.length]));
     } else {

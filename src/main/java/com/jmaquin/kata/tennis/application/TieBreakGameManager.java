@@ -1,7 +1,7 @@
 package com.jmaquin.kata.tennis.application;
 
 import com.jmaquin.kata.tennis.domain.TieBreakGame;
-import com.jmaquin.kata.tennis.domain.enums.Status;
+import com.jmaquin.kata.tennis.domain.enums.State;
 
 public class TieBreakGameManager {
   public TieBreakGame playerOneScores(TieBreakGame tieBreakGame) {
@@ -11,13 +11,13 @@ public class TieBreakGameManager {
       return tieBreakGame
           .toBuilder()
           .playerOneScore(updatedPlayerOneScore)
-          .status(Status.FINISHED)
+          .state(State.FINISHED)
           .build();
     } else {
       return tieBreakGame
           .toBuilder()
           .playerOneScore(updatedPlayerOneScore)
-          .status(Status.ONGOING)
+          .state(State.ONGOING)
           .build();
     }
   }
@@ -30,13 +30,13 @@ public class TieBreakGameManager {
       return tieBreakGame
           .toBuilder()
           .playerTwoScore(updatedPlayerTwoScore)
-          .status(Status.FINISHED)
+          .state(State.FINISHED)
           .build();
     } else {
       return tieBreakGame
           .toBuilder()
           .playerTwoScore(updatedPlayerTwoScore)
-          .status(Status.ONGOING)
+          .state(State.ONGOING)
           .build();
     }
   }

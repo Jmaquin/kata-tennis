@@ -1,6 +1,6 @@
 package com.jmaquin.kata.tennis.domain;
 
-import com.jmaquin.kata.tennis.domain.enums.Status;
+import com.jmaquin.kata.tennis.domain.enums.State;
 import lombok.Builder;
 import lombok.Data;
 
@@ -9,5 +9,5 @@ import lombok.Data;
 public class TieBreakGame {
   private final int playerOneScore;
   private final int playerTwoScore;
-  private final Status status;
+  @Builder.Default private final State state = State.NOT_STARTED;
 }

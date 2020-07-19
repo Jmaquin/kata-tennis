@@ -79,7 +79,7 @@ class IncrementGameScoreShould {
   @ParameterizedTest
   @EnumSource(
       value = GameScore.class,
-      names = {"ZERO", "FIFTEEN", "THIRTY"})
+      names = {"ZERO", "FIFTEEN"})
   void throw_illegal_argument_exception_when_increment_deuce_rule_enabled(GameScore aGameScore) {
     // Given
     final boolean isDeuce = true;
