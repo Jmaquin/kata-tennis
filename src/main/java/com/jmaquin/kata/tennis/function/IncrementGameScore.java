@@ -1,6 +1,6 @@
 package com.jmaquin.kata.tennis.function;
 
-import com.jmaquin.kata.tennis.domain.GameScore;
+import com.jmaquin.kata.tennis.domain.enums.GameScore;
 import java.util.Objects;
 import java.util.function.BiFunction;
 

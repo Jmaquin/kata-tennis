@@ -2,7 +2,7 @@ package com.jmaquin.kata.tennis.validator;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-import com.jmaquin.kata.tennis.domain.GameScore;
+import com.jmaquin.kata.tennis.domain.enums.GameScore;
 import io.vavr.Tuple2;
 import io.vavr.control.Validation;
 import java.util.Collection;
@@ -58,9 +58,9 @@ class GameScoreValidatorShould {
   }
 
   @Provide
-  Arbitrary<Tuple.Tuple2<GameScore, GameScore>> validGameScores() {
-    List<GameScore> scorerGameScores = List.of(GameScore.values());
-    List<GameScore> opponentGameScores = List.of(GameScore.values());
+  private Arbitrary<Tuple.Tuple2<GameScore, GameScore>> validGameScores() {
+    final List<GameScore> scorerGameScores = List.of(GameScore.values());
+    final List<GameScore> opponentGameScores = List.of(GameScore.values());
     final Collection<Tuple.Tuple2<GameScore, GameScore>> validGameScores =
         scorerGameScores.stream()
             .flatMap(

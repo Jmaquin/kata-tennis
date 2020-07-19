@@ -3,7 +3,7 @@ package com.jmaquin.kata.tennis.function;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
-import com.jmaquin.kata.tennis.domain.GameScore;
+import com.jmaquin.kata.tennis.domain.enums.GameScore;
 import java.util.stream.Stream;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;

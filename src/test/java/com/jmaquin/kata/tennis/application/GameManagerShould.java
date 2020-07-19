@@ -5,7 +5,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.Mockito.when;
 
 import com.jmaquin.kata.tennis.domain.Game;
-import com.jmaquin.kata.tennis.domain.GameScore;
+import com.jmaquin.kata.tennis.domain.enums.GameScore;
 import com.jmaquin.kata.tennis.function.UpdateGameScore;
 import io.vavr.Tuple;
 import io.vavr.Tuple2;
@@ -21,7 +21,7 @@ class GameManagerShould {
   @InjectMocks private GameManager gameManager;
 
   @Test
-  void score_for_player_one() {
+  void score_point_for_player_one() {
     // Given
     final GameScore aPlayerOneScore = GameScore.getRandomScore();
     final GameScore aPlayerTwoScore = GameScore.getRandomScore();
@@ -41,7 +41,7 @@ class GameManagerShould {
   }
 
   @Test
-  void score_for_player_two() {
+  void score_point_for_player_two() {
     // Given
     final GameScore aPlayerOneScore = GameScore.getRandomScore();
     final GameScore aPlayerTwoScore = GameScore.getRandomScore();

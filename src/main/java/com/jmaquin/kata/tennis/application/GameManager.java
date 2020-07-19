@@ -1,7 +1,7 @@
 package com.jmaquin.kata.tennis.application;
 
 import com.jmaquin.kata.tennis.domain.Game;
-import com.jmaquin.kata.tennis.domain.GameScore;
+import com.jmaquin.kata.tennis.domain.enums.GameScore;
 import com.jmaquin.kata.tennis.function.UpdateGameScore;
 import io.vavr.Tuple2;
 import java.util.Objects;

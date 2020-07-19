@@ -1,4 +1,4 @@
-package com.jmaquin.kata.tennis.domain;
+package com.jmaquin.kata.tennis.domain.enums;
 
 import static io.vavr.API.*;
 import static io.vavr.Predicates.isIn;

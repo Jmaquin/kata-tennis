@@ -2,7 +2,7 @@ package com.jmaquin.kata.tennis.validator;
 
 import static io.vavr.API.*;
 
-import com.jmaquin.kata.tennis.domain.GameScore;
+import com.jmaquin.kata.tennis.domain.enums.GameScore;
 import io.vavr.Tuple;
 import io.vavr.Tuple2;
 import io.vavr.control.Validation;

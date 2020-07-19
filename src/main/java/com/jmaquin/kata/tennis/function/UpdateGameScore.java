@@ -3,7 +3,7 @@ package com.jmaquin.kata.tennis.function;
 import static io.vavr.API.*;
 import static io.vavr.Predicates.isIn;
 
-import com.jmaquin.kata.tennis.domain.GameScore;
+import com.jmaquin.kata.tennis.domain.enums.GameScore;
 import com.jmaquin.kata.tennis.validator.GameScoresValidator;
 import io.vavr.Tuple;
 import io.vavr.Tuple2;

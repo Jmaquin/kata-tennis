@@ -1,5 +1,6 @@
 package com.jmaquin.kata.tennis.domain;
 
+import com.jmaquin.kata.tennis.domain.enums.GameScore;
 import lombok.Builder;
 import lombok.Data;
 
