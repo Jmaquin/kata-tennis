@@ -55,7 +55,7 @@ class MatchManagerShould {
   void not_change_match_state_when_player_one_scores_and_match_and_set_ongoing() {
     // Given
     final Match aMatch = aMatch(aSetWithState(SetState.ONGOING), State.ONGOING, Winner.UNKNOWN);
-    final Set aSet = aSetWithStateAndScores(SetScore.ONE, SetScore.ZERO, SetState.ONGOING);
+    final Set aSet = aSetWithScoresAndState(SetScore.ONE, SetScore.ZERO, SetState.ONGOING);
     when(setManager.playerOneScores(aMatch.getSet())).thenReturn(aSet);
 
     // When
@@ -70,7 +70,7 @@ class MatchManagerShould {
   void not_change_match_state_when_player_two_scores_and_match_and_set_ongoing() {
     // Given
     final Match aMatch = aMatch(aSetWithState(SetState.ONGOING), State.ONGOING, Winner.UNKNOWN);
-    final Set aSet = aSetWithStateAndScores(SetScore.ONE, SetScore.ZERO, SetState.ONGOING);
+    final Set aSet = aSetWithScoresAndState(SetScore.ONE, SetScore.ZERO, SetState.ONGOING);
     when(setManager.playerTwoScores(aMatch.getSet())).thenReturn(aSet);
 
     // When
@@ -85,7 +85,7 @@ class MatchManagerShould {
   void finish_match_when_player_one_scores_and_set_finished() {
     // Given
     final Match aMatch = aMatch(aSetWithState(SetState.ONGOING), State.ONGOING, Winner.UNKNOWN);
-    final Set aSet = aSetWithStateAndScores(SetScore.ONE, SetScore.ZERO, SetState.FINISHED);
+    final Set aSet = aSetWithScoresAndState(SetScore.ONE, SetScore.ZERO, SetState.FINISHED);
     when(setManager.playerOneScores(aMatch.getSet())).thenReturn(aSet);
 
     // When
@@ -100,7 +100,7 @@ class MatchManagerShould {
   void finish_match_when_player_two_scores_and_set_finished() {
     // Given
     final Match aMatch = aMatch(aSetWithState(SetState.ONGOING), State.ONGOING, Winner.UNKNOWN);
-    final Set aSet = aSetWithStateAndScores(SetScore.ONE, SetScore.ZERO, SetState.FINISHED);
+    final Set aSet = aSetWithScoresAndState(SetScore.ONE, SetScore.ZERO, SetState.FINISHED);
     when(setManager.playerTwoScores(aMatch.getSet())).thenReturn(aSet);
 
     // When

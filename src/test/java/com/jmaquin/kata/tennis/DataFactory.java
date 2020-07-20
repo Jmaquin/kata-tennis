@@ -51,11 +51,15 @@ public class DataFactory {
     return Set.builder().build();
   }
 
+  public static Set aSetWithScores(SetScore aPlayerOneScore, SetScore aPlayerTwoScore) {
+    return Set.builder().playerOneScore(aPlayerOneScore).playerTwoScore(aPlayerTwoScore).build();
+  }
+
   public static Set aSetWithState(SetState aSetState) {
     return Set.builder().state(aSetState).build();
   }
 
-  public static Set aSetWithStateAndScores(
+  public static Set aSetWithScoresAndState(
       SetScore aPlayerOneScore, SetScore aPlayerTwoScore, SetState aSetState) {
     return Set.builder()
         .playerOneScore(aPlayerOneScore)
