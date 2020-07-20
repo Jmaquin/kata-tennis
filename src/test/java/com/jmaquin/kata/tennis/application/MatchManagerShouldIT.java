@@ -43,7 +43,7 @@ class MatchManagerShouldIT {
     Match aMatch = aMatch();
 
     // When
-    while (State.NOT_STARTED.equals(aMatch.getState()) || State.ONGOING.equals(aMatch.getState())) {
+    while (!State.FINISHED.equals(aMatch.getState())) {
       if (rd.nextBoolean()) {
         aMatch = matchManager.playerOneScores(aMatch);
       } else {
@@ -54,48 +54,48 @@ class MatchManagerShouldIT {
     // Then
     assertThat(aMatch.getState()).isEqualTo(State.FINISHED);
     assertThat(aMatch.getWinner()).isNotEqualTo(Winner.UNKNOWN);
+
     final List<SetScore> playerScores =
         List.of(aMatch.getSet().getPlayerOneScore(), aMatch.getSet().getPlayerTwoScore());
+
     assertThat(playerScores).containsAnyOf(SetScore.SIX, SetScore.SEVEN);
-    assertThat(
-            playerScores.stream()
-                .filter(
-                    playerScore ->
-                        SetScore.SIX.equals(playerScore) || SetScore.SEVEN.equals(playerScore)))
-        .hasSizeGreaterThan(0);
 
     if (SetScore.SIX.equals(aMatch.getSet().getPlayerOneScore())
         && aMatch.getWinner().equals(Winner.PLAYER_1)) {
-      assertThat(aMatch.getSet().getPlayerTwoScore()).isNotEqualTo(SetScore.SEVEN);
-      assertThat(aMatch.getSet().getPlayerTwoScore()).isNotEqualTo(SetScore.SIX);
-      assertThat(aMatch.getSet().getPlayerTwoScore()).isNotEqualTo(SetScore.FIVE);
+      assertThat(List.of(SetScore.SEVEN, SetScore.SIX, SetScore.FIVE))
+          .doesNotContain(aMatch.getSet().getPlayerTwoScore());
     }
 
     if (SetScore.SEVEN.equals(aMatch.getSet().getPlayerOneScore())
         && aMatch.getWinner().equals(Winner.PLAYER_1)) {
-      assertThat(aMatch.getSet().getPlayerTwoScore()).isNotEqualTo(SetScore.SEVEN);
-      assertThat(aMatch.getSet().getPlayerTwoScore()).isNotEqualTo(SetScore.FOUR);
-      assertThat(aMatch.getSet().getPlayerTwoScore()).isNotEqualTo(SetScore.THREE);
-      assertThat(aMatch.getSet().getPlayerTwoScore()).isNotEqualTo(SetScore.TWO);
-      assertThat(aMatch.getSet().getPlayerTwoScore()).isNotEqualTo(SetScore.ONE);
-      assertThat(aMatch.getSet().getPlayerTwoScore()).isNotEqualTo(SetScore.ZERO);
+      assertThat(
+              List.of(
+                  SetScore.SEVEN,
+                  SetScore.FOUR,
+                  SetScore.THREE,
+                  SetScore.TWO,
+                  SetScore.ONE,
+                  SetScore.ZERO))
+          .doesNotContain(aMatch.getSet().getPlayerTwoScore());
     }
 
     if (SetScore.SIX.equals(aMatch.getSet().getPlayerTwoScore())
         && aMatch.getWinner().equals(Winner.PLAYER_2)) {
-      assertThat(aMatch.getSet().getPlayerOneScore()).isNotEqualTo(SetScore.SEVEN);
-      assertThat(aMatch.getSet().getPlayerOneScore()).isNotEqualTo(SetScore.SIX);
-      assertThat(aMatch.getSet().getPlayerOneScore()).isNotEqualTo(SetScore.FIVE);
+      assertThat(List.of(SetScore.SEVEN, SetScore.SIX, SetScore.FIVE))
+          .doesNotContain(aMatch.getSet().getPlayerOneScore());
     }
 
     if (SetScore.SEVEN.equals(aMatch.getSet().getPlayerTwoScore())
         && aMatch.getWinner().equals(Winner.PLAYER_2)) {
-      assertThat(aMatch.getSet().getPlayerOneScore()).isNotEqualTo(SetScore.SEVEN);
-      assertThat(aMatch.getSet().getPlayerOneScore()).isNotEqualTo(SetScore.FOUR);
-      assertThat(aMatch.getSet().getPlayerOneScore()).isNotEqualTo(SetScore.THREE);
-      assertThat(aMatch.getSet().getPlayerOneScore()).isNotEqualTo(SetScore.TWO);
-      assertThat(aMatch.getSet().getPlayerOneScore()).isNotEqualTo(SetScore.ONE);
-      assertThat(aMatch.getSet().getPlayerOneScore()).isNotEqualTo(SetScore.ZERO);
+      assertThat(
+              List.of(
+                  SetScore.SEVEN,
+                  SetScore.FOUR,
+                  SetScore.THREE,
+                  SetScore.TWO,
+                  SetScore.ONE,
+                  SetScore.ZERO))
+          .doesNotContain(aMatch.getSet().getPlayerOneScore());
     }
   }
 }
