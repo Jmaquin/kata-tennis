@@ -1,7 +1,5 @@
 package com.jmaquin.kata.tennis.application;
 
-import static io.vavr.API.*;
-
 import com.jmaquin.kata.tennis.domain.Match;
 import com.jmaquin.kata.tennis.domain.Set;
 import com.jmaquin.kata.tennis.domain.enums.SetState;
@@ -18,70 +16,50 @@ public class MatchManager {
   }
 
   public Match playerOneScores(Match match) {
-    return Match(match.getState())
-        .of(
-            Case(
-                $(State.NOT_STARTED),
-                () ->
-                    match
-                        .toBuilder()
-                        .set(setManager.playerOneScores(match.getSet()))
-                        .state(State.ONGOING)
-                        .build()),
-            Case(
-                $(State.ONGOING),
-                () -> {
-                  final Set updatedSet = setManager.playerOneScores(match.getSet());
-                  return Match(updatedSet.getState())
-                      .of(
-                          Case(
-                              $(SetState.FINISHED),
-                              () ->
-                                  match
-                                      .toBuilder()
-                                      .set(updatedSet)
-                                      .state(State.FINISHED)
-                                      .winner(Winner.PLAYER_1)
-                                      .build()),
-                          Case(
-                              $(),
-                              () ->
-                                  match.toBuilder().set(updatedSet).state(State.ONGOING).build()));
-                }),
-            Case($(State.FINISHED), () -> match));
+    if (State.NOT_STARTED.equals(match.getState())) {
+      return match
+          .toBuilder()
+          .set(setManager.playerOneScores(match.getSet()))
+          .state(State.ONGOING)
+          .build();
+    } else if (State.ONGOING.equals(match.getState())) {
+      final Set updatedSet = setManager.playerOneScores(match.getSet());
+      if (SetState.FINISHED.equals(updatedSet.getState())) {
+        return match
+            .toBuilder()
+            .set(updatedSet)
+            .state(State.FINISHED)
+            .winner(Winner.PLAYER_1)
+            .build();
+      } else {
+        return match.toBuilder().set(updatedSet).state(State.ONGOING).build();
+      }
+    } else {
+      return match;
+    }
   }
 
   public Match playerTwoScores(Match match) {
-    return Match(match.getState())
-        .of(
-            Case(
-                $(State.NOT_STARTED),
-                () ->
-                    match
-                        .toBuilder()
-                        .set(setManager.playerTwoScores(match.getSet()))
-                        .state(State.ONGOING)
-                        .build()),
-            Case(
-                $(State.ONGOING),
-                () -> {
-                  final Set updatedSet = setManager.playerTwoScores(match.getSet());
-                  return Match(updatedSet.getState())
-                      .of(
-                          Case(
-                              $(SetState.FINISHED),
-                              () ->
-                                  match
-                                      .toBuilder()
-                                      .set(updatedSet)
-                                      .state(State.FINISHED)
-                                      .winner(Winner.PLAYER_2)
-                                      .build()),
-                          Case(
-                              $(),
-                              () ->
-                                  match.toBuilder().set(updatedSet).state(State.ONGOING).build()));
-                }),
-            Case($(State.FINISHED), () -> match));
+    if (State.NOT_STARTED.equals(match.getState())) {
+      return match
+          .toBuilder()
+          .set(setManager.playerTwoScores(match.getSet()))
+          .state(State.ONGOING)
+          .build();
+    } else if (State.ONGOING.equals(match.getState())) {
+      final Set updatedSet = setManager.playerTwoScores(match.getSet());
+      if (SetState.FINISHED.equals(updatedSet.getState())) {
+        return match
+            .toBuilder()
+            .set(updatedSet)
+            .state(State.FINISHED)
+            .winner(Winner.PLAYER_2)
+            .build();
+      } else {
+        return match.toBuilder().set(updatedSet).state(State.ONGOING).build();
+      }
+    } else {
+      return match;
+    }
   }
 }
